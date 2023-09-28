@@ -1,6 +1,8 @@
 package personPackage;
 
 import java.io.IOException;
+
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -9,7 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.xml.internal.serialize.Printer;
+import personBeans.Livreur;
+
+
+
+
 
 /**
  * Servlet implementation class Person
@@ -37,18 +43,53 @@ public class Person extends HttpServlet {
 		
 		out.print("<h1> Bonjour je suis la pour vous benir </h1>");*/
 		
+		//Envoyer des donnes
 		String nom = "Faly mahita anao zah malala aa";
-		
 		request.setAttribute("nom", nom);
 		
-		this.getServletContext().getRequestDispatcher("/Person.jsp").forward(request, response);;
+		
+		//get paramettre sur l'url
+		String name = request.getParameter("name");
+		request.setAttribute("name", name);
+		
+		//Tableau
+		String[] tabName = {"Enzo","Rakoto","Fanja","Loloavi"}; 
+		request.setAttribute("tabName", tabName);
+		
+		//Java BEans = object
+		
+		// Person p1 = new Person();
+		//p1.setNom("Rondro");
+		//p1.setPrenom("Akondro");
+		//p1.setIsActif(true);
+		
+		Livreur p1 = new Livreur();
+	    p1.setNom("Rondro");
+		p1.setPrenom("Akondro");
+		p1.setIsActif(true);
+		request.setAttribute("p1", p1);
+		
+		
+		this.getServletContext().getRequestDispatcher("/Person.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	   /*Livreur test= new Livreur();
+	   test.verifyIdentifiant(request);
+	   request.setAttribute("form", test);
+		System.out.print(test.getResultat());*/
+		//this.getServletContext().getRequestDispatcher("/Person.jsp").forward(request, response);
+		//doGet(request,response);
+		
+		String username = request.getParameter("username");
+        
+        request.setAttribute("username", username);
+        
+       // this.getServletContext().getRequestDispatcher("/Person.jsp").forward(request, response);
+	
 	}
 
 }
